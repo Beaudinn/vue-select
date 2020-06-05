@@ -3,9 +3,9 @@
 </style>
 
 <template>
-  <div :dir="dir" class="v-select" :class="stateClasses">
+  <div :dir="dir" class="v-select f" :class="stateClasses">
     <slot name="header" v-bind="scope.header" />
-    <div :id="`vs${uid}__combobox`" ref="toggle" @mousedown="toggleDropdown($event)" class="vs__dropdown-toggle" role="combobox" :aria-expanded="dropdownOpen.toString()" :aria-owns="`vs${uid}__listbox`" aria-label="Search for option">
+    <div :id="`vs${uid}__combobox`" ref="toggle" @mousedown="toggleDropdown($event)" :class="inputClasses" class="vs__dropdown-toggle form-input block w-full sm:text-sm sm:leading-5" role="combobox" :aria-expanded="dropdownOpen.toString()" :aria-owns="`vs${uid}__listbox`" aria-label="Search for option">
 
       <div class="vs__selected-options" ref="selectedOptions">
         <slot v-for="option in selectedValue"
@@ -171,6 +171,11 @@
         default: false
       },
 
+      itemrow: {
+        type: Boolean,
+        default: false
+      },
+
       /**
        * Equivalent to the `placeholder` attribute on an `<input>`.
        * @type {String}
@@ -216,6 +221,11 @@
       label: {
         type: String,
         default: 'label'
+      },
+
+      error: {
+        type: Boolean,
+        default: false,
       },
 
       /**
@@ -1106,11 +1116,18 @@
         return {
           'vs--open': this.dropdownOpen,
           'vs--single': !this.multiple,
+          'vs--itemrow': this.itemrow,
           'vs--searching': this.searching && !this.noDrop,
           'vs--searchable': this.searchable && !this.noDrop,
           'vs--unsearchable': !this.searchable,
           'vs--loading': this.mutableLoading,
           'vs--disabled': this.disabled
+        }
+      },
+
+      inputClasses() {
+        return {
+          'border-red-300 text-red-900 placeholder-red-300 focus:border-red-300 focus:shadow-outline-red': this.error,
         }
       },
 

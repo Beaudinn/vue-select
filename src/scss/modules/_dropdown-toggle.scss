@@ -18,10 +18,14 @@ $border-radius: $vs-border-radius;
 .vs__dropdown-toggle {
   appearance: none;
   display: flex;
-  padding: 0 0 4px 0;
-  background: none;
-  border: $border-width $border-style $border-color;
-  border-radius: $border-radius;
+
+  padding-top: 0.1rem;
+  padding-bottom: 0.5rem;
+  padding-left: 0.1rem;
+//  padding: 0 0 4px 0;
+  // background: none;
+  // border: $border-width $border-style $border-color;
+  // border-radius: $border-radius;
   white-space: normal;
 }
 
